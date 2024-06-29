@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-
 export const getUserInfo = async (req: Request, res: Response) => {
     const userId = req.params.id;
     try {

@@ -50,41 +50,19 @@
 ![HLSD](odo1.png)
  ** Live Location tracking for realtime PCR & Crime Reporting**
 
-### Components:
-
-1.  **Express Log Ingestor:**
-    
-    -   An Express server serving as the log ingestor, receiving logs over HTTP on port `3000`.
-    -   Ingests log data in JSON format and produces messages to Kafka for further processing.
-2.  **Kafka Cluster:**
-    
-    -   Utilizes a Kafka cluster with two brokers, each managing partitions for scalability.
-    -   The Kafka topic serves as an intermediary for log messages between the ingestor and processing components.
-3.  **Elasticsearch Database:**
-    
-    -   Elasticsearch is employed as the backend database for storing and indexing log data efficiently.
-    -   Provides powerful full-text search capabilities, making it suitable for querying log information.
-4.  **Consumer Service (Node.js/Python):**
-    
-    -   A dedicated consumer service continuously listens to the Kafka topic for incoming log messages.
-    -   Consumes messages and asynchronously adds log data to Elasticsearch for indexing and storage.
-    -   Enhances system scalability, allowing independent scaling of the log ingestor and consumer components.
 
 ### System Architecture:
 
 -   **Decoupling:**
     
-    -   Log ingestor and log processing components are decoupled through Kafka.
+    -   log processing components are decoupled through Kafka.
     -   Kafka acts as a message broker, facilitating asynchronous communication between components.
 -   **Scalability:**
     
     -   Kafka's partitioning allows for horizontal scalability, enabling efficient handling of increasing log volumes.
     -   Independently scalable components: The Express server and Kafka brokers can scale based on the workload.
 -   **Durability and Fault Tolerance:**
-    
-    -   Kafka ensures durability by persisting log messages.
-    -   Fault-tolerant architecture: In case of component failures, Kafka retains messages, and the consumer can catch up.
--   **Asynchronous Processing:**
+
     
     -   Asynchronous log processing enables the log ingestor to continue ingesting logs without waiting for database operations to complete.
 

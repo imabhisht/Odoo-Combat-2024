@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Location from "../models/location.model";
 
-export const createLocation = async (req: Request, res: Response) => {
+export const saveCrimeSceneLocation = async (req: Request, res: Response) => {
 	try {
 		const { userId, latitude, longitude } = req.body;
 

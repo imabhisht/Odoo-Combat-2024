@@ -3,6 +3,7 @@ import cors from "cors";
 import userRouter from "./routes/user.route";
 import * as dotenv from "dotenv";
 import connectDB from "./db/conn";
+import locationRouter from "./routes/location.route";
 
 dotenv.config();
 
@@ -15,13 +16,16 @@ app.use(
 	})
 );
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const port = process.env.PORT || 5000;
 
 connectDB()
 	.then(() => {
 		app.listen(port, () => {
 			console.log(
-				`Server is running at http://localhost:${port}`
+				`Server is running at http://localhost:${process.env.PORT}`
 			);
 		});
 	})
@@ -29,12 +33,9 @@ connectDB()
 		console.log("MongoDB failed to connect ...", err);
 	});
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
-app.use('/users', userRouter);
+app.use("/users", userRouter);
+app.use("/location", locationRouter);
 
 app.get("/", (req: Request, res: Response) => {
-	res.send("Hello, World!");
+	res.send("Hello there, we are Team BigO( WON ) !");
 });

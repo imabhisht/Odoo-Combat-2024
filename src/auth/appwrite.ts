@@ -1,8 +1,9 @@
 import sdk from "node-appwrite";
 
 class AppwriteClient {
-  private client: sdk.Client;
+  public client: sdk.Client;
   public account: sdk.Account;
+  public role: sdk.Role;
   public endpoint = process.env.APPWRITE_ENDPOINT!
   public project = process.env.APPWRITE_PROJECT!
   public apiKey = process.env.APPWRITE_API_KEY!
@@ -24,6 +25,7 @@ class AppwriteClient {
     }
 
     this.account = new sdk.Account(this.client);
+    this.role = new sdk.Role();
   }
 }
 

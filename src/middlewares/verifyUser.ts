@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import AppwriteClient from '../auth/appwrite';
+import { AuthenticatedRequest } from '../interface';
 
-export const authenticateToken = async(req: Request, res: Response, next: NextFunction) => {
+export const authenticateToken = async(req : any, res: any, next: NextFunction) => {
     try {
         const token = req.headers['authorization'];
     
@@ -12,6 +13,7 @@ export const authenticateToken = async(req: Request, res: Response, next: NextFu
         const appwriteClient = new AppwriteClient(token);
         const userInfo = await appwriteClient.account.get()
         console.log(userInfo);
+        req.custom_session = userInfo; 
         next();
     } catch (error: any) {
         console.log(error);

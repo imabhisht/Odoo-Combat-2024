@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import MarkersPage from './Page/MarkersPage'
 import { Routes, Route } from 'react-router-dom'
+import CrimeReportPage from './Page/CrimeReportPage'
   
 function App() {
   const [count, setCount] = useState(0)
@@ -12,6 +13,7 @@ function App() {
     <>
       <Routes>
         <Route path="/Location" element={<MarkersPage />} />
+        <Route path="/Reports" element={<CrimeReportPage />} />
       </Routes>
 
     </>

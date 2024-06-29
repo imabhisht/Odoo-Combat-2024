@@ -1,7 +1,7 @@
 import React from 'react'
 import Markers from '../components/Markers'
 
-const Page1 = () => {
+const MarkersPage = () => {
   return (
     <div>
       shrey is working here
@@ -11,4 +11,4 @@ const Page1 = () => {
   )
 }
 
-export default Page1
+export default MarkersPage

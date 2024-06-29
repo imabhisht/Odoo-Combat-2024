@@ -1,21 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
+import AppwriteClient from '../auth/appwrite';
 
-export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers['authorization'];
+export const authenticateToken = async(req: Request, res: Response, next: NextFunction) => {
+    try {
+        const token = req.headers['authorization'];
+    
+        if (!token) {
+            return res.status(401).json({ message: 'Unauthorized: No token provided' });
+        }
 
-    if (!token) {
-        return res.status(401).json({ message: 'Unauthorized: No token provided' });
+        const appwriteClient = new AppwriteClient(token);
+        const userInfo = await appwriteClient.account.get()
+        console.log(userInfo);
+        next();
+    } catch (error: any) {
+        console.log(error);
+        return res.status(401).json({ message: error.message });
     }
-
-    // If you need to validate the token, you can add token verification logic here
-    // For example, you can use JWT to verify the token:
-    // jwt.verify(token, secretKey, (err, decoded) => {
-    //     if (err) {
-    //         return res.status(401).json({ message: 'Unauthorized: Invalid token' });
-    //     }
-    //     req.user = decoded;  // Save decoded information to request if needed
-    //     next();
-    // });
-
-    next();
+    
 };

@@ -8,15 +8,20 @@ class AppwriteClient {
   public apiKey = process.env.APPWRITE_API_KEY!
 
 
-  constructor() {
+  constructor(jwtToken?: string) {
     this.client = new sdk.Client();
     
 
     this.client
       .setSelfSigned(true)
-      .setProject(this.project)
-      .setKey(this.apiKey)
-      .setEndpoint(this.endpoint);
+      .setProject("667f7dd700207eb41830")
+      .setEndpoint("https://cloud.appwrite.io/v1");
+
+    if (jwtToken) {
+      this.client.setJWT(jwtToken);
+    }else{
+      this.client.setKey(this.apiKey);
+    }
 
     this.account = new sdk.Account(this.client);
   }

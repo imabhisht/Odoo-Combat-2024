@@ -6,7 +6,7 @@ import { authenticateToken } from '../middlewares';
 
 const userRouter = Router();
 
-userRouter.get('/user/:id',  authenticateToken, getUserInfo);
-userRouter.post('/user', authenticateToken, createUser);
+userRouter.get('/',  authenticateToken, getUserInfo);
+userRouter.post('/', authenticateToken, createUser);
 
 export default userRouter;

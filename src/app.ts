@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 app.get("/", (req: Request, res: Response) => {
 	res.send("Hello, World!");

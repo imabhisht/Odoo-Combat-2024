@@ -9,10 +9,17 @@ enum Role {
     POLICe = 'police',
 }
 
-export const getUserInfo = async (req: Request, res: Response) => {
-    const userId = req.params.id;
+export const getUserInfo = async (req: any, res: Response) => {
     try {
-        return res.status(200).json({ message: "User info fetched successfully" });
+        const user = await prisma.user.findUnique({
+            where: {
+                id: req.custom_session["$id"]
+            }
+        });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        return res.status(200).json({ message: "User info fetched successfully", data: user });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });

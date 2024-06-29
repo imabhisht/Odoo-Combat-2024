@@ -3,6 +3,7 @@ import cors from "cors";
 import userRouter from "./routes/user.route";
 import * as dotenv from "dotenv";
 import connectDB from "./db/conn";
+import reportRouter from "./routes/report.route";
 import locationRouter from "./routes/location.route";
 import { generateUploadURL } from "./upload/s3";
 
@@ -23,20 +24,21 @@ app.use(express.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 5000;
 
-connectDB()
-	.then(() => {
-		app.listen(port, () => {
-			console.log(
-				`Server is running at http://localhost:${process.env.PORT}`
-			);
-		});
-	})
-	.catch((err) => {
-		console.log("MongoDB failed to connect ...", err);
-	});
+// connectDB()
+// 	.then(() => {
+// 		app.listen(port, () => {
+// 			console.log(
+// 				`Server is running at http://localhost:${process.env.PORT}`
+// 			);
+// 		});
+// 	})
+// 	.catch((err) => {
+// 		console.log("MongoDB failed to connect ...", err);
+// 	});
 
 app.use("/users", userRouter);
 app.use("/location", locationRouter);
+app.use("/reports", reportRouter);
 
 app.get("/s3Url", async (req, res) => {
 	const url = await generateUploadURL();
@@ -45,4 +47,10 @@ app.get("/s3Url", async (req, res) => {
 
 app.get("/", (req: Request, res: Response) => {
 	res.send("Hello there, we are Team BigO( WON ) !");
+});
+
+app.listen(port, () => {
+	console.log(
+		`Server is running at http://localhost:${process.env.PORT}`
+	);
 });

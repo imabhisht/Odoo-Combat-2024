@@ -1,21 +1,25 @@
-
 import sdk from "node-appwrite";
-const config = {
-  endpoint: process.env.APPWRITE_ENDPOINT!,
-  project: process.env.APPWRITE_PROJECT!,
-  key: process.env.APPWRITE_API_KEY!,
-};
 
-const client = new sdk.Client();
-
-client
-    .setSelfSigned(true)
-    .setProject(config.project)
-    .setKey(config.key)
-    .setEndpoint(config.endpoint);
+class AppwriteClient {
+  private client: sdk.Client;
+  public account: sdk.Account;
+  public endpoint = process.env.APPWRITE_ENDPOINT!
+  public project = process.env.APPWRITE_PROJECT!
+  public apiKey = process.env.APPWRITE_API_KEY!
 
 
-const account = new sdk.Account(client);
-export {
-  account
+  constructor() {
+    this.client = new sdk.Client();
+    
+
+    this.client
+      .setSelfSigned(true)
+      .setProject(this.project)
+      .setKey(this.apiKey)
+      .setEndpoint(this.endpoint);
+
+    this.account = new sdk.Account(this.client);
+  }
 }
+
+export default AppwriteClient;

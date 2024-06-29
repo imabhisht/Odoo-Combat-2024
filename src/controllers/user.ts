@@ -9,10 +9,9 @@ enum Role {
     POLICe = 'police',
 }
 
-export const getUserInfo = async (req: Request, res: Response) => {
-    const userId = req.params.id;
+export const getUserInfo = async (req: any, res: Response) => {
     try {
-        return res.status(200).json({ message: "User info fetched successfully" });
+        return res.status(200).json({ message: "User info fetched successfully", data: req.custom_session });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });

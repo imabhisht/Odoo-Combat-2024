@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import { userRouter } from "./routes/user.route";
+import userRouter from "./routes/user.route";
 import * as dotenv from "dotenv";
 dotenv.config();
 

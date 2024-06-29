@@ -5,6 +5,9 @@ import './App.css'
 import MarkersPage from './Page/MarkersPage'
 import { Routes, Route } from 'react-router-dom'
 import CrimeReportPage from './Page/CrimeReportPage'
+import LoginPage from './Page/Login'
+import ProtectedRoute from './components/ProtectedRoute';
+
 
 import HeatMap from './components/HeatMap';
 
@@ -22,6 +25,7 @@ function App() {
         <Route path="/Location" element={<MarkersPage />} />
         <Route path="/Reports" element={<CrimeReportPage />} />
         <Route path='/HeatMap' element={<HeatMap />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
 
     </>

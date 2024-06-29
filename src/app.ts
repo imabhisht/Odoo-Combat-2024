@@ -1,25 +1,56 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import userRouter from "./routes/user.route";
-import reportRouter from "./routes/report.route";
 import * as dotenv from "dotenv";
+import connectDB from "./db/conn";
+import reportRouter from "./routes/report.route";
+import locationRouter from "./routes/location.route";
+import { generateUploadURL } from "./upload/s3";
+
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+
+app.use(express.static("front"));
+app.use(
+	cors({
+		origin: "*",
+		credentials: true,
+	})
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
+const port = process.env.PORT || 5000;
 
-app.use('/users', userRouter);
-app.use('/reports', reportRouter);
+// connectDB()
+// 	.then(() => {
+// 		app.listen(port, () => {
+// 			console.log(
+// 				`Server is running at http://localhost:${process.env.PORT}`
+// 			);
+// 		});
+// 	})
+// 	.catch((err) => {
+// 		console.log("MongoDB failed to connect ...", err);
+// 	});
+
+app.use("/users", userRouter);
+app.use("/location", locationRouter);
+app.use("/reports", reportRouter);
+
+app.get("/s3Url", async (req, res) => {
+	const url = await generateUploadURL();
+	res.send({ url });
+});
 
 app.get("/", (req: Request, res: Response) => {
-	res.send("Hello, World!");
+	res.send("Hello there, we are Team BigO( WON ) !");
 });
 
 app.listen(port, () => {
-	console.log(`Server is running at http://localhost:${port}`);
+	console.log(
+		`Server is running at http://localhost:${process.env.PORT}`
+	);
 });

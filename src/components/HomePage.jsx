@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
-import { useMapEvent } from "react-leaflet";
+import { MapContainer, TileLayer, useMapEvent } from "react-leaflet";
 
 function SetViewOnClick({ animateRef }) {
 	const map = useMapEvent("click", (e) => {
@@ -19,6 +18,7 @@ const Home = () => {
 
 	return (
 		<>
+			{/* <Navbar /> */}
 			<p>
 				<label>
 					<input

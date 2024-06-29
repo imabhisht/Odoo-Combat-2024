@@ -11,7 +11,7 @@ const Login = () => {
 	async function login() {
 		try {
 			setTimeout(() => {
-				navigate("/");
+				navigate("/location");
 			}, 100);
 			// await account.createEmailPasswordSession(
 			// 	email,

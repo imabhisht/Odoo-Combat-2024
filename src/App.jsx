@@ -5,7 +5,8 @@ import "./App.css";
 import MarkersPage from "./Page/MarkersPage";
 import { Routes, Route } from "react-router-dom";
 import CrimeReportPage from "./Page/CrimeReportPage";
-import LoginPage from "./Page/Login";
+import Login from "./Page/Login";
+import Register from "./Page/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import HeatMap from "./components/HeatMap";
@@ -28,7 +29,7 @@ function App() {
 
 	return (
 		<>
-			<Navbar />
+			{/* <Navbar /> */}
 			<Routes>
 				<Route
 					path='/Location'
@@ -43,6 +44,11 @@ function App() {
 				<Route
 					path='/Form'
 					element={<Form user={user} />}
+				/>
+				<Route path='/login' element={<Login />} />
+				<Route
+					path='/register'
+					element={<Register />}
 				/>
 			</Routes>
 		</>

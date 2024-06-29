@@ -1,37 +1,41 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../App.css";
 import { account, ID } from "../lib/appwrite";
+import "../App.css";
+import { useNavigate } from "react-router-dom";
 
-const App = () => {
-	const [loggedInUser, setLoggedInUser] = useState(null);
+const Register = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
-	const history = useNavigate();
+	const navigate = useNavigate();
 
-	async function login(email, password) {
+	async function register() {
 		try {
-			await account.createEmailPasswordSession(
+			await account.create(
+				ID.unique(),
 				email,
-				password
+				password,
+				name
 			);
-			setLoggedInUser(await account.get());
-			history.push("/dashboard"); // Redirect to the login page or dashboard
+			setTimeout(() => {
+				navigate("/login");
+			}, 100); // Simulate delay
 		} catch (error) {
-			console.error("Login failed", error);
+			console.error("Registration failed", error);
 		}
 	}
 
 	return (
 		<div className='app-container'>
-			<img src='cid.jpeg' alt='Logo' className='logo' />
+			<img
+				src='cid.jpeg'
+				alt='Logo'
+				className='logo'
+				height='200px'
+				width='200px'
+			/>
 			<h2 className='title'>Crime Reporting System</h2>
-			<p className='status'>
-				{loggedInUser
-					? `Logged in as ${loggedInUser.name}`
-					: "Not logged in"}
-			</p>
+			<p className='status'>Register to report crimes</p>
 			<div className='form-container'>
 				<input
 					type='email'
@@ -62,36 +66,14 @@ const App = () => {
 				/>
 				<button
 					type='button'
-					onClick={async () => {
-						try {
-							await account.create(
-								ID.unique(),
-								email,
-								password,
-								name
-							);
-							login(email, password);
-						} catch (error) {
-							console.error(
-								"Registration failed",
-								error
-							);
-						}
-					}}
+					onClick={register}
 					className='button register'
 				>
 					Register
-				</button>
-				<button
-					type='button'
-					onClick={() => login(email, password)}
-					className='button login'
-				>
-					Login
 				</button>
 			</div>
 		</div>
 	);
 };
 
-export default App;
+export default Register;

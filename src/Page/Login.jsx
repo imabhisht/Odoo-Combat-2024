@@ -1,66 +1,67 @@
-import React from "react";
-import "./LoginPage.css";
-import { account } from "../appwrite";
+import React, { useState } from "react";
+import { account } from "../lib/appwrite";
+import "../App.css";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		console.log({
-			username: data.get("username"),
-			password: data.get("password"),
-		});
+const Login = () => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
-		account.createEmailPasswordSession(
-			data.get("username"),
-			data.get("password")
-		)
-			.then(() => {
-				console.log("Logged in");
-				localStorage.setItem(
-					"email",
-					data.get("username")
-				);
-			})
-			.catch((error) => {
-				console.error("Error:", error);
-			});
-	};
+	async function login() {
+		try {
+			setTimeout(() => {
+				navigate("/");
+			}, 100);
+			// await account.createEmailPasswordSession(
+			// 	email,
+			// 	password
+			// );
+		} catch (error) {
+			console.error("Login failed", error);
+		}
+	}
 
 	return (
-		<div className='container'>
-			<div className='login-box'>
-				<div className='avatar'>
-					<img
-						src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Odoo_logo_rgb.svg/2560px-Odoo_logo_rgb.svg.png'
-						alt='Avatar'
-					/>
-				</div>
-				<h1>Login</h1>
-				<form onSubmit={handleSubmit}>
-					<div className='textbox'>
-						<input
-							type='email'
-							name='username'
-							placeholder='Email'
-							required
-						/>
-					</div>
-					<div className='textbox'>
-						<input
-							type='password'
-							name='password'
-							placeholder='Password'
-							required
-						/>
-					</div>
-					<button type='submit' className='btn'>
-						Login
-					</button>
-				</form>
+		<div className='app-container'>
+			<img
+				src='../public/cid.jpeg'
+				alt='Logo'
+				className='logo'
+				height='200px'
+				width='200px'
+			/>
+			<h2 className='title'>Crime Reporting System</h2>
+			<p className='status'>Login to your account</p>
+			<div className='form-container'>
+				<input
+					type='email'
+					placeholder='Email'
+					value={email}
+					onChange={(e) =>
+						setEmail(e.target.value)
+					}
+					className='input-field'
+				/>
+				<input
+					type='password'
+					placeholder='Password'
+					value={password}
+					onChange={(e) =>
+						setPassword(e.target.value)
+					}
+					className='input-field'
+				/>
+				<button
+					type='button'
+					onClick={login}
+					className='button login'
+				>
+					Login
+				</button>
 			</div>
 		</div>
 	);
 };
 
-export default LoginPage;
+export default Login;

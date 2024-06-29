@@ -1,11 +1,17 @@
-import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 import "./App.css";
-import CrimeReportPage from "./Page/CrimeReportPage";
 import MarkersPage from "./Page/MarkersPage";
-import Register from "./Page/Register";
-import Login from "./Page/Login";
+import { Routes, Route } from "react-router-dom";
+import CrimeReportPage from "./Page/CrimeReportPage";
+import LoginPage from "./Page/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import HeatMap from "./components/HeatMap";
+import HomePage from "./Page/HomePage";
+import Form from "./components/Form";
+import Navbar from "./components/Navbar";
 
 function App() {
 	const heatmapData = [
@@ -14,8 +20,15 @@ function App() {
 		[51.52, -0.12, 0.8],
 	];
 
+	const user = {
+		// id: 123,
+		// name: 'John Doe',
+		// email: 'shrey@gmil.com'
+	};
+
 	return (
 		<>
+			<Navbar />
 			<Routes>
 				<Route
 					path='/Location'
@@ -26,11 +39,11 @@ function App() {
 					element={<CrimeReportPage />}
 				/>
 				<Route path='/HeatMap' element={<HeatMap />} />
+				<Route path='/' element={<HomePage />} />
 				<Route
-					path='/register'
-					element={<Register />}
+					path='/Form'
+					element={<Form user={user} />}
 				/>
-				<Route path='/login' element={<Login />} />
 			</Routes>
 		</>
 	);

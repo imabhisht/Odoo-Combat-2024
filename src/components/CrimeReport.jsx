@@ -5,33 +5,91 @@ import 'leaflet/dist/leaflet.css';
 
 // Mock crime report data
 const crimeReports = [
-    { user_id: '26', type: 'Theft', description: 'Phone stolen from park bench', location: { type: 'Point', coordinates: [45.4215, -75.6919] }, timestamp: '2023-01-15T10:30:00Z', media_url: 'https://example.com/image26.jpg', is_anonymous: false, created_at: '2023-01-15T10:30:00Z', updated_at: '2023-01-15T10:30:00Z' },
-    { user_id: '27', type: 'Vandalism', description: 'Broken windows in public library', location: { type: 'Point', coordinates: [37.7749, -122.4194] }, timestamp: '2023-02-20T15:45:00Z', media_url: 'https://example.com/image27.jpg', is_anonymous: true, created_at: '2023-02-20T15:45:00Z', updated_at: '2023-02-20T15:45:00Z' },
-    { user_id: '28', type: 'Assault', description: 'Street brawl near downtown', location: { type: 'Point', coordinates: [34.0522, -118.2437] }, timestamp: '2023-03-10T08:00:00Z', media_url: 'https://example.com/image28.jpg', is_anonymous: false, created_at: '2023-03-10T08:00:00Z', updated_at: '2023-03-10T08:00:00Z' },
-    { user_id: '29', type: 'Robbery', description: 'Gas station armed robbery', location: { type: 'Point', coordinates: [40.7128, -74.006] }, timestamp: '2023-04-05T14:20:00Z', media_url: 'https://example.com/image29.jpg', is_anonymous: true, created_at: '2023-04-05T14:20:00Z', updated_at: '2023-04-05T14:20:00Z' },
-    { user_id: '30', type: 'Burglary', description: 'Residential break-in during daytime', location: { type: 'Point', coordinates: [51.5074, -0.1278] }, timestamp: '2023-05-18T11:10:00Z', media_url: 'https://example.com/image30.jpg', is_anonymous: false, created_at: '2023-05-18T11:10:00Z', updated_at: '2023-05-18T11:10:00Z' },
-    { user_id: '31', type: 'Theft', description: 'Shoplifting incident at mall', location: { type: 'Point', coordinates: [48.8566, 2.3522] }, timestamp: '2023-06-22T16:50:00Z', media_url: 'https://example.com/image31.jpg', is_anonymous: true, created_at: '2023-06-22T16:50:00Z', updated_at: '2023-06-22T16:50:00Z' },
-    { user_id: '32', type: 'Vandalism', description: 'Graffiti on city walls', location: { type: 'Point', coordinates: [41.9028, 12.4964] }, timestamp: '2023-07-30T09:15:00Z', media_url: 'https://example.com/image32.jpg', is_anonymous: false, created_at: '2023-07-30T09:15:00Z', updated_at: '2023-07-30T09:15:00Z' },
-    { user_id: '33', type: 'Assault', description: 'Assault outside nightclub', location: { type: 'Point', coordinates: [35.6895, 139.6917] }, timestamp: '2023-08-12T22:00:00Z', media_url: 'https://example.com/image33.jpg', is_anonymous: true, created_at: '2023-08-12T22:00:00Z', updated_at: '2023-08-12T22:00:00Z' },
-    { user_id: '34', type: 'Robbery', description: 'Bank robbery with hostages', location: { type: 'Point', coordinates: [55.7558, 37.6173] }, timestamp: '2023-09-05T17:30:00Z', media_url: 'https://example.com/image34.jpg', is_anonymous: false, created_at: '2023-09-05T17:30:00Z', updated_at: '2023-09-05T17:30:00Z' },
-    { user_id: '35', type: 'Burglary', description: 'Break-in at jewelry store', location: { type: 'Point', coordinates: [52.5200, 13.4050] }, timestamp: '2023-10-19T13:40:00Z', media_url: 'https://example.com/image35.jpg', is_anonymous: true, created_at: '2023-10-19T13:40:00Z', updated_at: '2023-10-19T13:40:00Z' },
-    { user_id: '36', type: 'Theft', description: 'Theft of electronic devices', location: { type: 'Point', coordinates: [19.4326, -99.1332] }, timestamp: '2023-11-08T18:00:00Z', media_url: 'https://example.com/image36.jpg', is_anonymous: false, created_at: '2023-11-08T18:00:00Z', updated_at: '2023-11-08T18:00:00Z' },
-    { user_id: '37', type: 'Vandalism', description: 'Public transportation bus vandalized', location: { type: 'Point', coordinates: [34.0522, -118.2437] }, timestamp: '2023-12-25T12:00:00Z', media_url: 'https://example.com/image37.jpg', is_anonymous: true, created_at: '2023-12-25T12:00:00Z', updated_at: '2023-12-25T12:00:00Z' },
-    { user_id: '38', type: 'Assault', description: 'Street altercation between gangs', location: { type: 'Point', coordinates: [51.5074, -0.1278] }, timestamp: '2024-01-03T19:30:00Z', media_url: 'https://example.com/image38.jpg', is_anonymous: false, created_at: '2024-01-03T19:30:00Z', updated_at: '2024-01-03T19:30:00Z' },
-    { user_id: '39', type: 'Robbery', description: 'Convenience store armed robbery', location: { type: 'Point', coordinates: [41.9028, 12.4964] }, timestamp: '2024-02-14T14:45:00Z', media_url: 'https://example.com/image39.jpg', is_anonymous: true, created_at: '2024-02-14T14:45:00Z', updated_at: '2024-02-14T14:45:00Z' },
-    { user_id: '40', type: 'Burglary', description: 'Break-in at software company', location: { type: 'Point', coordinates: [35.6895, 139.6917] }, timestamp: '2024-03-20T11:20:00Z', media_url: 'https://example.com/image40.jpg', is_anonymous: false, created_at: '2024-03-20T11:20:00Z', updated_at: '2024-03-20T11:20:00Z' },
-    { user_id: '41', type: 'Theft', description: 'Wallet stolen in busy market', location: { type: 'Point', coordinates: [55.7558, 37.6173] }, timestamp: '2024-04-18T16:00:00Z', media_url: 'https://example.com/image41.jpg', is_anonymous: true, created_at: '2024-04-18T16:00:00Z', updated_at: '2024-04-18T16:00:00Z' },
-    { user_id: '42', type: 'Vandalism', description: 'Public park benches vandalized', location: { type: 'Point', coordinates: [52.5200, 13.4050] }, timestamp: '2024-05-10T09:00:00Z', media_url: 'https://example.com/image42.jpg', is_anonymous: false, created_at: '2024-05-10T09:00:00Z', updated_at: '2024-05-10T09:00:00Z' },
-    { user_id: '43', type: 'Assault', description: 'Street fight involving weapons', location: { type: 'Point', coordinates: [19.4326, -99.1332] }, timestamp: '2024-06-28T17:30:00Z', media_url: 'https://example.com/image43.jpg', is_anonymous: true, created_at: '2024-06-28T17:30:00Z', updated_at: '2024-06-28T17:30:00Z' },
-    { user_id: '44', type: 'Robbery', description: 'Armored truck robbery', location: { type: 'Point', coordinates: [37.7749, -122.4194] }, timestamp: '2024-07-22T13:15:00Z', media_url: 'https://example.com/image44.jpg', is_anonymous: false, created_at: '2024-07-22T13:15:00Z', updated_at: '2024-07-22T13:15:00Z' },
-    { user_id: '45', type: 'Burglary', description: 'Break-in at art gallery', location: { type: 'Point', coordinates: [40.7128, -74.006] }, timestamp: '2024-08-30T10:45:00Z', media_url: 'https://example.com/image45.jpg', is_anonymous: true, created_at: '2024-08-30T10:45:00Z', updated_at: '2024-08-30T10:45:00Z' },
-    { user_id: '46', type: 'Theft', description: 'Purse snatching incident', location: { type: 'Point', coordinates: [51.5074, -0.1278] }, timestamp: '2024-09-14T14:00:00Z', media_url: 'https://example.com/image46.jpg', is_anonymous: false, created_at: '2024-09-14T14:00:00Z', updated_at: '2024-09-14T14:00:00Z' },
-    { user_id: '47', type: 'Vandalism', description: 'Street art defaced', location: { type: 'Point', coordinates: [48.8566, 2.3522] }, timestamp: '2024-10-08T08:30:00Z', media_url: 'https://example.com/image47.jpg', is_anonymous: true, created_at: '2024-10-08T08:30:00Z', updated_at: '2024-10-08T08:30:00Z' },
-    { user_id: '48', type: 'Assault', description: 'Assault in shopping mall', location: { type: 'Point', coordinates: [41.9028, 12.4964] }, timestamp: '2024-11-05T12:20:00Z', media_url: 'https://example.com/image48.jpg', is_anonymous: false, created_at: '2024-11-05T12:20:00Z', updated_at: '2024-11-05T12:20:00Z' },
-    { user_id: '49', type: 'Robbery', description: 'Jewelry shop armed robbery', location: { type: 'Point', coordinates: [35.6895, 139.6917] }, timestamp: '2024-12-02T15:00:00Z', media_url: 'https://example.com/image49.jpg', is_anonymous: true, created_at: '2024-12-02T15:00:00Z', updated_at: '2024-12-02T15:00:00Z' },
-    { user_id: '50', type: 'Burglary', description: 'Break-in at technology company', location: { type: 'Point', coordinates: [34.0522, -118.2437] }, timestamp: '2025-01-10T18:45:00Z', media_url: 'https://example.com/image50.jpg', is_anonymous: false, created_at: '2025-01-10T18:45:00Z', updated_at: '2025-01-10T18:45:00Z' },
-    // Continuing with more crime reports...
-  ];
+  {
+    "id": "7be552e5-307b-4d85-9a59-24d5dbbede23",
+    "user_id": null,
+    "type": "steal",
+    "description": "Someone Stole my Android Phone",
+    "event_time": "2024-06-29T07:58:15.553Z",
+    "media_url": null,
+    "is_anonymous": true,
+    "created_at": "2024-06-29T08:03:07.445Z",
+    "updated_at": "2024-06-29T08:03:07.445Z",
+    "title": "Phone Stealing",
+    "lat": "23.208027778",   // Convert to number
+    "long": "72.63613888899999"  // Convert to number
+  },
+  {
+    "id": "e2455786-981e-48e9-8e23-514e45f727ae",
+    "user_id": "667fa17e00143f700eb0",
+    "type": "steal",
+    "description": "Someone Stole my Android Phone",
+    "event_time": "2024-06-29T07:58:15.553Z",
+    "media_url": null,
+    "is_anonymous": false,
+    "created_at": "2024-06-29T08:04:45.661Z",
+    "updated_at": "2024-06-29T08:04:45.661Z",
+    "title": "Phone Stealing",
+    "lat": "23.208027778",   // Convert to number
+    "long": "72.63613888899999"  // Convert to number
+  },
+  {
+    "id": "f7f8b1e3-1b76-47b3-8724-9ff3b6b26e8e",
+    "user_id": null,
+    "type": "vandalism",
+    "description": "Someone vandalized my car",
+    "event_time": "2024-06-29T08:10:20.123Z",
+    "media_url": null,
+    "is_anonymous": true,
+    "created_at": "2024-06-29T08:15:35.567Z",
+    "updated_at": "2024-06-29T08:15:35.567Z",
+    "title": "Car Vandalism",
+    "lat": "23.205678234",   // Convert to number
+    "long": "72.639823456"   // Convert to number
+  },
+  {
+    "id": "c1a5b9df-3c6b-4cbf-8a60-7af84b28a4b1",
+    "user_id": "567fa17e00143f700eb1",
+    "type": "assault",
+    "description": "Someone assaulted me",
+    "event_time": "2024-06-29T08:12:30.789Z",
+    "media_url": null,
+    "is_anonymous": false,
+    "created_at": "2024-06-29T08:18:45.321Z",
+    "updated_at": "2024-06-29T08:18:45.321Z",
+    "title": "Physical Assault",
+    "lat": "23.210978123",   // Convert to number
+    "long": "72.631267890"   // Convert to number
+  },
+  {
+    "id": "ab1f9d2e-7a98-4b3d-b234-7b5c37c9d6f4",
+    "user_id": null,
+    "type": "theft",
+    "description": "My bicycle was stolen",
+    "event_time": "2024-06-29T08:20:45.543Z",
+    "media_url": null,
+    "is_anonymous": true,
+    "created_at": "2024-06-29T08:25:55.789Z",
+    "updated_at": "2024-06-29T08:25:55.789Z",
+    "title": "Bicycle Theft",
+    "lat": "23.207123789",   // Convert to number
+    "long": "72.640123456"   // Convert to number
+  },
+  {
+    "id": "d3e8b7f1-9d8e-487a-937b-8eaf1c8e3b45",
+    "user_id": "467fa17e00143f700eb2",
+    "type": "robbery",
+    "description": "I was robbed at knifepoint",
+    "event_time": "2024-06-29T08:25:50.987Z",
+    "media_url": null,
+    "is_anonymous": false,
+    "created_at": "2024-06-29T08:30:12.654Z",
+    "updated_at": "2024-06-29T08:30:12.654Z",
+    "title": "Robbery",
+    "lat": "23.209456123",   // Convert to number
+    "long": "72.635678912"   // Convert to number
+  }
+];
 
 const CrimeReport = ({ filters }) => {
   const createIcon = (color) => {
@@ -45,13 +103,13 @@ const CrimeReport = ({ filters }) => {
     return crimeReports.filter((report) => {
       const matchesLocation =
         !filters.location ||
-        report.location.coordinates.join(',').includes(filters.location);
-      const matchesType = !filters.type || report.type === filters.type;
-
+        `${report.lat},${report.long}`.includes(filters.location);
+        const matchesType = !filters.type || report.type.toLowerCase() === filters.type.toLowerCase();
+  
       // Convert filter dates to Date objects for comparison
       const filterDateFrom = filters.dateFrom ? new Date(filters.dateFrom) : null;
       const filterDateTo = filters.dateTo ? new Date(filters.dateTo) : null;
-      const reportDate = new Date(report.timestamp);
+      const reportDate = new Date(report.event_time);
 
       // Date comparisons
       const matchesDateFrom = !filterDateFrom || reportDate >= filterDateFrom;
@@ -73,7 +131,7 @@ const CrimeReport = ({ filters }) => {
       {filteredReports.map((report, index) => (
         <Marker
           key={index}
-          position={report.location.coordinates}
+          position={[parseFloat(report.lat), parseFloat(report.long)]} // Convert strings to numbers
           icon={createIcon('red')}
         >
           <Popup>
@@ -83,7 +141,7 @@ const CrimeReport = ({ filters }) => {
             <br />
             <img src={report.media_url} alt={report.type} style={{ width: '100px' }} />
             <br />
-            Reported at: {new Date(report.timestamp).toLocaleString()}
+            Reported at: {new Date(report.event_time).toLocaleString()}
           </Popup>
         </Marker>
       ))}

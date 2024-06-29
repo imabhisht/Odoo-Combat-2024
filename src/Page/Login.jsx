@@ -1,75 +1,66 @@
-import React, { useState } from "react";
-import { account, ID } from "../lib/appwrite";
-import "../App.css";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import "./LoginPage.css";
+import { account } from "../appwrite";
 
-const Register = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [name, setName] = useState("");
-	const navigate = useNavigate();
+const LoginPage = () => {
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const data = new FormData(event.currentTarget);
+		console.log({
+			username: data.get("username"),
+			password: data.get("password"),
+		});
 
-	async function register() {
-		try {
-			await account.create(
-				ID.unique(),
-				email,
-				password,
-				name
-			);
-			navigate("/login"); // Redirect to the login page
-		} catch (error) {
-			console.error("Registration failed", error);
-		}
-	}
+		account.createEmailPasswordSession(
+			data.get("username"),
+			data.get("password")
+		)
+			.then(() => {
+				console.log("Logged in");
+				localStorage.setItem(
+					"email",
+					data.get("username")
+				);
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+			});
+	};
 
 	return (
-		<div className='app-container'>
-			<img
-				src='../public/cid.jpeg'
-				alt='Logo'
-				className='logo'
-			/>
-			<h2 className='title'>Crime Reporting System</h2>
-			<p className='status'>Register to report crimes</p>
-			<div className='form-container'>
-				<input
-					type='email'
-					placeholder='Email'
-					value={email}
-					onChange={(e) =>
-						setEmail(e.target.value)
-					}
-					className='input-field'
-				/>
-				<input
-					type='password'
-					placeholder='Password'
-					value={password}
-					onChange={(e) =>
-						setPassword(e.target.value)
-					}
-					className='input-field'
-				/>
-				<input
-					type='text'
-					placeholder='Name'
-					value={name}
-					onChange={(e) =>
-						setName(e.target.value)
-					}
-					className='input-field'
-				/>
-				<button
-					type='button'
-					onClick={register}
-					className='button register'
-				>
-					Register
-				</button>
+		<div className='container'>
+			<div className='login-box'>
+				<div className='avatar'>
+					<img
+						src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Odoo_logo_rgb.svg/2560px-Odoo_logo_rgb.svg.png'
+						alt='Avatar'
+					/>
+				</div>
+				<h1>Login</h1>
+				<form onSubmit={handleSubmit}>
+					<div className='textbox'>
+						<input
+							type='email'
+							name='username'
+							placeholder='Email'
+							required
+						/>
+					</div>
+					<div className='textbox'>
+						<input
+							type='password'
+							name='password'
+							placeholder='Password'
+							required
+						/>
+					</div>
+					<button type='submit' className='btn'>
+						Login
+					</button>
+				</form>
 			</div>
 		</div>
 	);
 };
 
-export default Register;
+export default LoginPage;

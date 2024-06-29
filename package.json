@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "appwrite": "^15.0.0",
-    "dotenv": "^16.4.5",
     "leaflet": "^1.9.4",
     "leaflet-heatmap": "^1.0.0",
     "leaflet.heat": "^0.2.0",
@@ -28,6 +27,7 @@
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "tailwindcss": "^3.4.4",
     "vite": "^5.3.1"
   }
 }

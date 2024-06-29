@@ -4,11 +4,13 @@ import userRouter from "./routes/user.route";
 import * as dotenv from "dotenv";
 import connectDB from "./db/conn";
 import locationRouter from "./routes/location.route";
+import { generateUploadURL } from "./upload/s3";
 
 dotenv.config();
 
 const app = express();
 
+app.use(express.static("front"));
 app.use(
 	cors({
 		origin: "*",
@@ -35,6 +37,11 @@ connectDB()
 
 app.use("/users", userRouter);
 app.use("/location", locationRouter);
+
+app.get("/s3Url", async (req, res) => {
+	const url = await generateUploadURL();
+	res.send({ url });
+});
 
 app.get("/", (req: Request, res: Response) => {
 	res.send("Hello there, we are Team BigO( WON ) !");

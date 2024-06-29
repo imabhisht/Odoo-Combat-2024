@@ -1,2 +1,43 @@
-node_modules
+# Node.js specific
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# TypeScript specific
+*.js
+*.js.map
+*.d.ts
+
+# IDE or editor specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# Environment specific
 .env
+*.env
+/.env
+/.env.local
+
+# Dependency directories
+/dist/
+/generated/
+
+# Log files
+*.log
+
+# Testing directories
+/test/
+
+# Ignore personal configuration files
+*.config.js
+
+# macOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db

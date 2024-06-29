@@ -18,11 +18,11 @@ class AppwriteClient {
       .setProject("667f7dd700207eb41830")
       .setEndpoint("https://cloud.appwrite.io/v1");
 
-    if (jwtToken) {
-      this.client.setJWT(jwtToken);
-    }else{
-      this.client.setKey(this.apiKey);
-    }
+		if (jwtToken) {
+			this.client.setJWT(jwtToken);
+		} else {
+			this.client.setKey(this.apiKey);
+		}
 
     this.account = new sdk.Account(this.client);
     this.role = new sdk.Role();

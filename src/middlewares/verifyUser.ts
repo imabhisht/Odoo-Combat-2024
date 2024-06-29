@@ -2,11 +2,16 @@ import { Request, Response, NextFunction } from 'express';
 import AppwriteClient from '../auth/appwrite';
 import { AuthenticatedRequest } from '../interface';
 
-export const authenticateToken = async(req : any, res: any, next: NextFunction) => {
+export const authenticateToken = (strict = false) => async(req : any, res: any, next: NextFunction) => {
     try {
         const token = req.headers['authorization'];
-    
-        if (!token) {
+
+        if(!strict && !token) {
+            req.custom_session = null; 
+            return next();
+        }
+        
+        if (strict && !token) {
             return res.status(401).json({ message: 'Unauthorized: No token provided' });
         }
 
@@ -14,7 +19,7 @@ export const authenticateToken = async(req : any, res: any, next: NextFunction) 
         const userInfo = await appwriteClient.account.get()
         console.log(userInfo);
         req.custom_session = userInfo; 
-        next();
+        return next();
     } catch (error: any) {
         console.log(error);
         return res.status(401).json({ message: error.message });

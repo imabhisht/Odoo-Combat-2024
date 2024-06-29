@@ -15,4 +15,22 @@ model user {
   role       String?
   email_id   String   @unique
   name       String
+  report     report[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model report {
+  id           String   @id @default(dbgenerated("gen_random_uuid()"))
+  user_id      String?
+  type         String?
+  description  String?
+  event_time   String?
+  media_url    String?
+  is_anonymous Boolean
+  created_at   DateTime @default(now()) @db.Timestamptz(6)
+  updated_at   DateTime @default(now()) @db.Timestamptz(6)
+  title        String
+  lat          Decimal? @db.Decimal
+  long         Decimal? @db.Decimal
+  user         user?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

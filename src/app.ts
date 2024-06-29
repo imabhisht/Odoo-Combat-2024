@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import userRouter from "./routes/user.route";
+import reportRouter from "./routes/report.route";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 
 
 app.use('/users', userRouter);
+app.use('/reports', reportRouter);
 
 app.get("/", (req: Request, res: Response) => {
 	res.send("Hello, World!");

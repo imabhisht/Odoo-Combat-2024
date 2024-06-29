@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import { userRouter } from "./routes/user.route";
+import userRouter from "./routes/user.route";
 import * as dotenv from "dotenv";
 import connectDB from "./db/conn";
 
@@ -32,7 +32,8 @@ connectDB()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/users", userRouter);
+
+app.use('/users', userRouter);
 
 app.get("/", (req: Request, res: Response) => {
 	res.send("Hello, World!");

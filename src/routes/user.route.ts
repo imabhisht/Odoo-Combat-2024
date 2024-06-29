@@ -1,9 +1,12 @@
-import express from "express";
-import { getUserInfo } from "../controllers";
-import { authenticateToken } from "../middlewares";
+// User Route
 
-const userRouter = express.Router();
+import { Router } from 'express';
+import { getUserInfo, createUser } from '../controllers/user.controller';
+import { authenticateToken } from '../middlewares';
 
-userRouter.get("/", authenticateToken, getUserInfo);
+const userRouter = Router();
 
-export { userRouter };
+userRouter.get('/',  authenticateToken, getUserInfo);
+userRouter.post('/', authenticateToken, createUser);
+
+export default userRouter;

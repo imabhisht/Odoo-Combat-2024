@@ -7,6 +7,9 @@ import { Routes, Route } from 'react-router-dom'
 import CrimeReportPage from './Page/CrimeReportPage'
 
 import HeatMap from './components/HeatMap';
+import HomePage from './Page/HomePage'
+import Form from './components/Form'
+import Navbar from './components/Navbar'
 
 function App() {
 
@@ -16,12 +19,21 @@ function App() {
     [51.52, -0.12, 0.8]
   ];
 
+  const user = {
+    // id: 123,
+    // name: 'John Doe',
+    // email: 'shrey@gmil.com'
+  };
+
   return (
     <>
+      <Navbar />
       <Routes>
         <Route path="/Location" element={<MarkersPage />} />
         <Route path="/Reports" element={<CrimeReportPage />} />
         <Route path='/HeatMap' element={<HeatMap />} />
+        <Route path='/' element={<HomePage />} />
+        <Route path='/Form' element={<Form  user={user}/>} />
       </Routes>
 
     </>

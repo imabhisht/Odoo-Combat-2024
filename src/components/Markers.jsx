@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -24,7 +25,6 @@ const Markers = () => {
             location: [position.coords.latitude, position.coords.longitude],
           };
           setData((prevData) => [...prevData, newLocation]);
-          console.log(newLocation)
         },
         (error) => {
           console.error('Error getting location:', error);
@@ -40,7 +40,6 @@ const Markers = () => {
       <button onClick={handleAddUserLocation}>
         Add your location
       </button>
-      <br />
       <MapContainer center={[20, 0]} zoom={2} style={{ height: '100vh', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Page1 from './Page/Page1'
+import MarkersPage from './Page/MarkersPage'
 import { Routes, Route } from 'react-router-dom'
   
 function App() {
@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/Page1" element={<Page1 />} />
+        <Route path="/Location" element={<MarkersPage />} />
       </Routes>
 
     </>

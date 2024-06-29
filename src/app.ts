@@ -1,6 +1,8 @@
-import express, { Request, Response } from 'express';
-import cors from 'cors';
-import { userRouter } from './routes/user';
+import express, { Request, Response } from "express";
+import cors from "cors";
+import { userRouter } from "./routes/user.route";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -9,12 +11,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use('/user', userRouter);
+app.use("/users", userRouter);
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, World!');
+app.get("/", (req: Request, res: Response) => {
+	res.send("Hello, World!");
 });
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+	console.log(`Server is running at http://localhost:${port}`);
 });

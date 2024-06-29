@@ -4,8 +4,6 @@ import { authenticateToken } from "../middlewares";
 
 const userRouter = express.Router();
 
-userRouter.get("/", authenticateToken ,getUserInfo);
+userRouter.get("/", authenticateToken, getUserInfo);
 
-export {
-    userRouter
-}
+export { userRouter };

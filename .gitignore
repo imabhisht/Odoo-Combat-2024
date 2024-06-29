@@ -19,6 +19,9 @@ yarn-error.log
 
 # Environment specific
 .env
+*.env
+/.env
+/.env.local
 
 # Dependency directories
 /dist/

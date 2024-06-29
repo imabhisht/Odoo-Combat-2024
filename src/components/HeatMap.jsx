@@ -1,5 +1,5 @@
 // src/components/MapComponent.js
-import React, +
+import React, 
 { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';

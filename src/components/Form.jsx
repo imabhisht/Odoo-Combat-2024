@@ -3,7 +3,7 @@ import CrimeLocation from './CrimeLocation';
 import React, { useState, useRef, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvent } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-
+import { createReports } from '../api'
 const SetViewOnClick = ({ animateRef, setCenter }) => {
     const map = useMapEvent('click', (e) => {
         setCenter([e.latlng.lat, e.latlng.lng]);
@@ -15,11 +15,6 @@ const SetViewOnClick = ({ animateRef, setCenter }) => {
 
     return null;
 };
-
-
-
-
-
 
 const Form = ({ user }) => {
 
@@ -82,6 +77,8 @@ const Form = ({ user }) => {
         const reportData = { ...formData, userId };
         console.log(reportData);
         // Here you would send reportData to the backend
+        createReports(reportData)
+
     };
 
     return (
@@ -107,23 +104,6 @@ const Form = ({ user }) => {
                                     ))}
                                 </MapContainer>
                             </>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </>
                     </div>
                     <form

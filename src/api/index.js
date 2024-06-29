@@ -1,6 +1,6 @@
 import { account } from "../appwrite";
 
-const base_url = ""
+const base_url = "http://localhost:5001"
 
 export const createReports = async () => {
     try {
